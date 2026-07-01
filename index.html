@@ -12,10 +12,8 @@ html {
 
 /* ─── BODY (FONDO UNIFICADO) ─── */
 body { 
-  /* Color morado oscuro como respaldo por si el contenido excede la altura de la imagen */
   background-color: #3b1959; 
-  /* Se aplica la imagen a todo el documento */
-  background-image: url('fondo.png');
+  background-image: url('fondo.jpg');
   background-size: 100% auto; 
   background-position: top center;
   background-repeat: no-repeat;
@@ -25,7 +23,7 @@ body {
 
 /* ─── NAVBAR ─── */
 .navbar {
-  background: #0d0636; /* Azul oscuro sólido para que siempre se lea al hacer scroll */
+  background: #0d0636; 
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -61,7 +59,7 @@ body {
   cursor: pointer;
 }
 
-/* ─── HERO (TRANSPARENTE PARA MOSTRAR EL FONDO) ─── */
+/* ─── HERO (DISEÑO MILIMÉTRICO PARA PORTADA) ─── */
 .hero {
   position: relative;
   width: 100%;
@@ -74,55 +72,62 @@ body {
 .hero-content {
   position: relative;
   z-index: 5;
-  width: 55%; 
+  width: 55%; /* Se asegura de que el texto y botón tomen la mitad izquierda */
   display: flex;
   flex-direction: column;
+  align-items: flex-start; /* Alinea los elementos a la izquierda estrictamente */
   gap: 15px;
 }
 .hero-main-logo img { 
   width: 100%; 
-  max-width: 720px; 
+  max-width: 750px; /* Permite que el texto sea grande e imponente */
   height: auto;
 }
 .hero-cta {
-  margin-top: 10px;
+  margin-top: 5px;
+  padding-left: 2%; /* Pequeño margen para alinear perfecto con el texto de arriba */
 }
 .hero-cta img { 
   width: 100%;
-  max-width: 320px; 
+  max-width: 360px; /* Tamaño ideal para el botón */
   cursor: pointer; 
   transition: transform .2s; 
   object-fit: contain; 
 }
 .hero-cta img:hover { transform: scale(1.05); }
 
+/* Visuales de la derecha (Corredor y Hexágono) */
 .hero-visuals {
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 50%; 
+  width: 50%; /* Exclusivamente la mitad derecha */
   height: 100%;
   z-index: 4;
   pointer-events: none;
 }
 .runner {
   position: absolute;
-  right: -2%;
-  bottom: -5%;
-  height: 115%; 
+  right: -5%; /* Lo empuja un poco a la derecha para que corte bien */
+  bottom: -5%; /* Permite que el pie descanse al ras */
+  height: 110%; /* Más alto que el contenedor para lograr ese corte dinámico */
+  width: auto;
   object-fit: contain;
 }
 .hexagono {
   position: absolute;
   bottom: 12%; 
-  left: 0; 
-  width: 240px; 
+  /* Posicionamiento clave: lo ancla a la izquierda de su mitad de pantalla (pegado al botón) */
+  left: -2%; 
+  width: 25vw; /* Tamaño dinámico basado en la pantalla */
+  max-width: 250px; 
+  min-width: 180px;
   z-index: 5;
   pointer-events: auto;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
 }
 
-/* ─── SECCIÓN PANELES (FONDOS REMOVIDOS) ─── */
+/* ─── SECCIÓN PANELES ─── */
 .panels-row, .panels-row-2 {
   display: flex;
   gap: 15px;
@@ -142,7 +147,7 @@ body {
   display: block;
 }
 
-/* ─── REGISTRO (FONDO REMOVIDO) ─── */
+/* ─── REGISTRO ─── */
 .registro-section {
   position: relative;
   background: transparent;
@@ -157,7 +162,7 @@ body {
 }
 .registro-title img { max-width: 600px; width: 100%; }
 
-/* ─── ORGANIZADORES (FONDO REMOVIDO) ─── */
+/* ─── ORGANIZADORES ─── */
 .org-section {
   position: relative;
   background: transparent;
@@ -203,7 +208,7 @@ body {
   margin: 12px 0;
 }
 
-/* ─── PATROCINADORES (FONDO REMOVIDO) ─── */
+/* ─── PATROCINADORES ─── */
 .patro-section {
   background: transparent;
   padding: 40px 5% 60px;
@@ -237,7 +242,7 @@ body {
 }
 .patro-box:hover { border-color: rgba(247,194,1,0.5); }
 
-/* ─── CONTACTO (FONDO REMOVIDO) ─── */
+/* ─── CONTACTO ─── */
 .contacto-section {
   position: relative;
   background: transparent; 
@@ -321,10 +326,12 @@ body {
 
 /* Adaptación para Tablets (Max 992px) */
 @media (max-width: 992px) {
-  body { background-size: 150% auto; } /* Hace zoom al fondo para que no se vea cortado */
+  body { background-size: 150% auto; } 
   .hero-content { width: 100%; z-index: 5; text-align: center; align-items: center; }
+  .hero-cta { padding-left: 0; }
   .hero-visuals { opacity: 0.6; }
   .hexagono { left: 10%; bottom: 5%; }
+  
   .panels-row, .panels-row-2 { flex-wrap: wrap; }
   .panel-item { max-width: 48%; margin-bottom: 15px; }
   .patro-grid { grid-template-columns: repeat(2, 1fr); }
@@ -336,7 +343,7 @@ body {
 
 /* Adaptación para Celulares (Max 768px) */
 @media (max-width: 768px) {
-  body { background-size: 250% auto; } /* Mayor zoom al fondo para móviles */
+  body { background-size: 250% auto; } 
   
   .navbar { padding: 10px 20px; }
   .menu-toggle { display: block; }
