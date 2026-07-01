@@ -10,40 +10,46 @@ html {
   scroll-behavior: smooth;
 }
 
-/* ─── BODY ─── */
+/* ─── BODY (FONDO UNIFICADO) ─── */
 body { 
-  background:#1a1466; 
-  overflow-x:hidden; 
-  font-family:Arial, sans-serif; 
+  /* Color morado oscuro como respaldo por si el contenido excede la altura de la imagen */
+  background-color: #3b1959; 
+  /* Se aplica la imagen a todo el documento */
+  background-image: url('fondo.jpg');
+  background-size: 100% auto; 
+  background-position: top center;
+  background-repeat: no-repeat;
+  overflow-x: hidden; 
+  font-family: Arial, sans-serif; 
 }
 
 /* ─── NAVBAR ─── */
 .navbar {
-  background:#1a1466;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:10px 40px;
-  position:sticky;
-  top:0;
-  z-index:100;
-  border-bottom:1px solid rgba(255,255,255,0.1);
+  background: #0d0636; /* Azul oscuro sólido para que siempre se lea al hacer scroll */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
   width: 100%;
 }
 
-.nav-logo img { height:52px; max-width: 100%; }
+.nav-logo img { height: 52px; max-width: 100%; }
 
 .nav-links {
-  display:flex;
-  align-items:center;
-  gap:32px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
   justify-content: center;
 }
-.nav-links img { height:32px; cursor:pointer; transition:opacity .2s; }
-.nav-links img:hover { opacity:.75; }
+.nav-links img { height: 32px; cursor: pointer; transition: opacity .2s; }
+.nav-links img:hover { opacity: .75; }
 
-.nav-donar img { height:52px; cursor:pointer; transition:transform .2s; }
-.nav-donar img:hover { transform:scale(1.05); }
+.nav-donar img { height: 52px; cursor: pointer; transition: transform .2s; }
+.nav-donar img:hover { transform: scale(1.05); }
 
 /* ─── BOTÓN MENÚ BAGUETTE ─── */
 .menu-toggle {
@@ -55,37 +61,27 @@ body {
   cursor: pointer;
 }
 
-/* ─── HERO (VISTA ESCRITORIO CORREGIDA) ─── */
+/* ─── HERO (TRANSPARENTE PARA MOSTRAR EL FONDO) ─── */
 .hero {
   position: relative;
   width: 100%;
-  min-height: 650px; /* Altura ajustada para dar espacio al corredor */
-  background-image: url('fondo.png');
-  background-size: cover;
-  background-position: center;
+  min-height: 650px; 
   overflow: hidden;
   display: flex;
   align-items: center;
   padding: 0 5%;
 }
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, rgba(15,8,90,0.7) 40%, rgba(15,8,90,0.1) 100%);
-  z-index: 1;
-}
 .hero-content {
   position: relative;
   z-index: 5;
-  width: 55%; /* Ocupa un poco más de la mitad izquierda */
+  width: 55%; 
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 .hero-main-logo img { 
   width: 100%; 
-  max-width: 720px; /* Tamaño máximo del texto/logos para que se vea grande */
+  max-width: 720px; 
   height: auto;
 }
 .hero-cta {
@@ -93,18 +89,18 @@ body {
 }
 .hero-cta img { 
   width: 100%;
-  max-width: 320px; /* Tamaño del botón Inscríbete */
+  max-width: 320px; 
   cursor: pointer; 
   transition: transform .2s; 
   object-fit: contain; 
 }
-.hero-cta img:hover { transform:scale(1.05); }
+.hero-cta img:hover { transform: scale(1.05); }
 
 .hero-visuals {
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 50%; /* Ocupa la mitad derecha estricta */
+  width: 50%; 
   height: 100%;
   z-index: 4;
   pointer-events: none;
@@ -113,142 +109,140 @@ body {
   position: absolute;
   right: -2%;
   bottom: -5%;
-  height: 115%; /* Hace que sobresalga un poco como en tu imagen */
+  height: 115%; 
   object-fit: contain;
 }
 .hexagono {
   position: absolute;
   bottom: 12%; 
-  left: 0; /* Lo alinea exactamente a la mitad de la pantalla chocando con la pierna */
+  left: 0; 
   width: 240px; 
   z-index: 5;
   pointer-events: auto;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
 }
 
-/* ─── SECCIÓN PANELES ─── */
+/* ─── SECCIÓN PANELES (FONDOS REMOVIDOS) ─── */
 .panels-row, .panels-row-2 {
-  display:flex;
-  gap:15px;
-  background:#1a1466;
-  padding:28px 2% 8px;
-  justify-content:center;
-  align-items:flex-start;
+  display: flex;
+  gap: 15px;
+  background: transparent;
+  padding: 28px 2% 8px;
+  justify-content: center;
+  align-items: flex-start;
 }
-.panels-row-2 { padding:8px 2% 28px; }
+.panels-row-2 { padding: 8px 2% 28px; }
 .panel-item {
-  flex:1;
-  max-width:32%;
+  flex: 1;
+  max-width: 32%;
 }
 .panel-item img {
-  width:100%;
-  height:auto;
-  display:block;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-/* ─── REGISTRO ─── */
+/* ─── REGISTRO (FONDO REMOVIDO) ─── */
 .registro-section {
-  position:relative;
-  background:#1a1466;
-  padding:40px 3%;
-  overflow:hidden;
+  position: relative;
+  background: transparent;
+  padding: 40px 3%;
+  overflow: hidden;
 }
 .registro-title {
-  text-align:center;
-  margin-bottom:32px;
-  position:relative;
-  z-index:1;
+  text-align: center;
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 1;
 }
-.registro-title img { max-width:600px; width:100%; }
+.registro-title img { max-width: 600px; width: 100%; }
 
-/* ─── ORGANIZADORES ─── */
+/* ─── ORGANIZADORES (FONDO REMOVIDO) ─── */
 .org-section {
-  position:relative;
-  background:#1a1466;
-  padding:40px 5% 50px;
-  overflow:hidden;
+  position: relative;
+  background: transparent;
+  padding: 40px 5% 50px;
+  overflow: hidden;
 }
 .org-watermark {
-  position:absolute;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:80%;
-  opacity:0.08;
-  pointer-events:none;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  opacity: 0.08;
+  pointer-events: none;
 }
 .org-title {
-  text-align:center;
-  margin-bottom:36px;
+  text-align: center;
+  margin-bottom: 36px;
 }
-.org-title img { max-width:700px; width:100%; }
+.org-title img { max-width: 700px; width: 100%; }
 .org-grid {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  align-items:center;
-  gap:32px 48px;
-  max-width:1100px;
-  margin:0 auto;
-  position:relative;
-  z-index:1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 32px 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 .org-grid img {
-  max-height:80px;
-  max-width:200px;
-  width:auto;
-  object-fit:contain;
-  filter:brightness(1.05);
+  max-height: 80px;
+  max-width: 200px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(1.05);
 }
 .org-divider {
-  width:100%;
-  height:1px;
-  background:rgba(255,255,255,0.12);
-  margin:12px 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,0.12);
+  margin: 12px 0;
 }
 
-/* ─── PATROCINADORES ─── */
+/* ─── PATROCINADORES (FONDO REMOVIDO) ─── */
 .patro-section {
-  background:#1a1466;
-  padding:40px 5% 60px;
-  border-top:2px solid rgba(247,194,1,0.25);
+  background: transparent;
+  padding: 40px 5% 60px;
 }
 .patro-title {
-  text-align:center;
-  margin-bottom:8px;
+  text-align: center;
+  margin-bottom: 8px;
 }
-.patro-title img { max-width:700px; width:100%; }
+.patro-title img { max-width: 700px; width: 100%; }
 .patro-unete {
-  text-align:center;
-  margin-bottom:32px;
+  text-align: center;
+  margin-bottom: 32px;
 }
-.patro-unete img { max-width:260px; width:100%; }
+.patro-unete img { max-width: 260px; width: 100%; }
 .patro-grid {
-  display:grid;
-  grid-template-columns:repeat(4, 1fr);
-  gap:14px;
-  max-width:1100px;
-  margin:0 auto 30px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  max-width: 1100px;
+  margin: 0 auto 30px;
 }
 .patro-box {
-  border:2px dashed rgba(255,255,255,0.3);
-  border-radius:10px;
-  height:90px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  transition:border-color .2s;
-  cursor:pointer;
+  border: 2px dashed rgba(255,255,255,0.3);
+  border-radius: 10px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .2s;
+  cursor: pointer;
 }
-.patro-box:hover { border-color:rgba(247,194,1,0.5); }
+.patro-box:hover { border-color: rgba(247,194,1,0.5); }
 
-/* ─── CONTACTO ─── */
+/* ─── CONTACTO (FONDO REMOVIDO) ─── */
 .contacto-section {
   position: relative;
-  background: #2b1f85; 
+  background: transparent; 
   padding: 60px 5%;
   overflow: hidden;
-  border-top: 2px solid rgba(255,255,255,0.05);
 }
 .contacto-title-container {
   display: flex;
@@ -327,6 +321,7 @@ body {
 
 /* Adaptación para Tablets (Max 992px) */
 @media (max-width: 992px) {
+  body { background-size: 150% auto; } /* Hace zoom al fondo para que no se vea cortado */
   .hero-content { width: 100%; z-index: 5; text-align: center; align-items: center; }
   .hero-visuals { opacity: 0.6; }
   .hexagono { left: 10%; bottom: 5%; }
@@ -341,8 +336,9 @@ body {
 
 /* Adaptación para Celulares (Max 768px) */
 @media (max-width: 768px) {
-  .navbar { padding: 10px 20px; }
+  body { background-size: 250% auto; } /* Mayor zoom al fondo para móviles */
   
+  .navbar { padding: 10px 20px; }
   .menu-toggle { display: block; }
   
   .nav-links {
@@ -352,7 +348,7 @@ body {
     top: 70px;
     left: 0;
     width: 100%;
-    background: #1a1466;
+    background: #0d0636;
     padding: 20px 0;
     gap: 20px;
     border-bottom: 2px solid rgba(255,255,255,0.1);
@@ -362,11 +358,10 @@ body {
   .nav-links.active { display: flex; }
   .nav-donar { display: none; } 
 
-  /* HERO EN CELULARES */
   .hero {
     min-height: auto;
     padding-top: 40px;
-    padding-bottom: 250px; /* Da espacio inferior para que quepa el precio */
+    padding-bottom: 250px; 
     align-items: flex-start;
   }
   .hero-content {
@@ -377,15 +372,15 @@ body {
   
   .hero-visuals {
     width: 100%;
-    height: 250px; /* Zona exclusiva abajo para las imágenes del héroe */
+    height: 250px; 
     bottom: 0;
-    opacity: 1; /* Retornamos la opacidad */
+    opacity: 1; 
   }
   .runner {
     right: -10%;
     bottom: 0;
     height: 100%;
-    opacity: 0.15; /* Corredor difuminado atrás del hexágono para no estorbar la lectura */
+    opacity: 0.15; 
   }
   .hexagono {
     left: 50%;
@@ -394,7 +389,6 @@ body {
     width: 150px;
   }
 
-  /* PANELES EN COLUMNA PARA CELULAR */
   .panels-row, .panels-row-2 { 
     flex-direction: column; 
     align-items: center; 
@@ -413,6 +407,7 @@ body {
 </head>
 <body>
 
+<!-- ═══ NAVBAR ═══ -->
 <header class="navbar">
   <div class="nav-logo"><img src="cabezera_1.png" alt="Carrera Mexi Teletón 2026"></div>
   
@@ -429,6 +424,7 @@ body {
   <div class="nav-donar"><img src="recurso_49.png" alt="Donar"></div>
 </header>
 
+<!-- ═══ HERO ═══ -->
 <section class="hero">
   <div class="hero-content">
    <div class="hero-main-logo"> 
@@ -444,18 +440,21 @@ body {
   </div>
 </section>
 
+<!-- ═══ ROW 1: DISTANCIAS · RUTA · CATEGORÍAS ═══ -->
 <div id="informacion" class="panels-row">
   <div class="panel-item"><img src="m1.png" alt="Distancias"></div>
   <div class="panel-item"><img src="m2.png" alt="Ruta"></div>
   <div class="panel-item"><img src="m3.png" alt="Categorías"></div>
 </div>
 
+<!-- ═══ ROW 2: HIDRATACIÓN · INFORMACIÓN · KIT ═══ -->
 <div class="panels-row-2">
   <div class="panel-item"><img src="m4.png" alt="Puntos de Hidratacion"></div>
   <div class="panel-item"><img src="m5.png" alt="Informacion"></div>
   <div class="panel-item"><img src="m6.png" alt="Kit corredor"></div>
 </div>
 
+<!-- ═══ ORGANIZADORES ═══ -->
 <section id="organizadores" class="org-section">
   <img class="org-watermark" src="logo_transparente.png" alt="">
 
@@ -478,6 +477,7 @@ body {
   </div>
 </section>
 
+<!-- ═══ PATROCINADORES ═══ -->
 <section id="patrocinadores" class="patro-section">
   <img class="org-watermark" src="logo_transparente.png" alt="">
   
@@ -494,6 +494,7 @@ body {
   </div>
 </section>
 
+<!-- ═══ CONTACTO ═══ -->
 <section id="contacto" class="contacto-section">
   
   <div class="contacto-title-container">
@@ -529,6 +530,7 @@ body {
   </div>
 </section>
 
+<!-- ═══ SCRIPT PARA MENÚ HAMBURGUESA ═══ -->
 <script>
   const mobileBtn = document.getElementById('mobile-menu-btn');
   const navLinks = document.getElementById('nav-links');
