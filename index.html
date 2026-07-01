@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrera Mexi Teletón 2026</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html {
+  scroll-behavior: smooth;
+}
+
+/* ─── BODY ─── */
+body { 
+  background:#1a1466; 
+  overflow-x:hidden; 
+  font-family:Arial, sans-serif; 
+  /* Eliminado el min-width de 1200px para permitir adaptabilidad */
+}
+
+/* ─── NAVBAR ─── */
+.navbar {
+  background:#1a1466;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 40px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  width: 100%;
+}
+
+.nav-logo img { height:52px; max-width: 100%; }
+
+.nav-links {
+  display:flex;
+  align-items:center;
+  gap:32px;
+  justify-content: center;
+}
+.nav-links img { height:32px; cursor:pointer; transition:opacity .2s; }
+.nav-links img:hover { opacity:.75; }
+
+.nav-donar img { height:52px; cursor:pointer; transition:transform .2s; }
+.nav-donar img:hover { transform:scale(1.05); }
+
+/* ─── BOTÓN MENÚ BAGUETTE (Oculto en escritorio) ─── */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/* ─── HERO ─── */
+.hero {
+  position:relative;
+  width:100%;
+  min-height:600px;
+  background-image:url('fondo.png');
+  background-size:cover;
+  background-position:center top;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  padding:40px 5%;
+}
+.hero::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to right, rgba(15,8,90,0.7) 40%, rgba(15,8,90,0.1) 100%);
+  z-index:1;
+}
+.hero-content {
+  position: relative;
+  z-index: 3;
+  width: 58%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.hero-date {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#f7c201;
+  font-size:2.4rem;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+.hero-date img { height:22px; }
+.hero-logos {
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+.hero-logos img { height:56px; }
+.hero-main-logo img { width:100%; max-width:620px; }
+.hero-subtitles {
+  color:white;
+  font-size:0.9rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  line-height:1.6;
+}
+.hero-subtitles span.yellow { color:#f7c201; }
+.hero-subtitles .solidarity {
+  font-size:0.85rem;
+  color:#f7c201;
+}
+.hero-cta img { height:62px; cursor:pointer; transition:transform .2s; margin-top:6px; max-width: 100%; object-fit: contain; }
+.hero-cta img:hover { transform:scale(1.05); }
+.hero-visuals {
+  position: absolute;
+  right: 0%;
+  bottom: 0;
+  width: 60%;
+  height: 100%;
+  z-index: 4;
+  pointer-events: none;
+}
+.runner {
+  position: absolute;
+  right: 8%;
+  bottom: -5%;
+  height: 115%;
+  object-fit: contain;
+}
+.hexagono {
+  position: absolute;
+  bottom: 8%;
+  right: 55%;
+  width: 175px;
+  z-index: 4;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
+  pointer-events: auto;
+}
+
+/* ─── SECCIÓN PANELES ─── */
+.panels-row, .panels-row-2 {
+  display:flex;
+  gap:15px;
+  background:#1a1466;
+  padding:28px 2% 8px;
+  justify-content:center;
+  align-items:flex-start;
+}
+.panels-row-2 { padding:8px 2% 28px; }
+.panel-item {
+  flex:1;
+  max-width:32%;
+}
+.panel-item img {
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+/* ─── REGISTRO ─── */
+.registro-section {
+  position:relative;
+  background:#1a1466;
+  padding:40px 3%;
+  overflow:hidden;
+}
+.registro-title {
+  text-align:center;
+  margin-bottom:32px;
+  position:relative;
+  z-index:1;
+}
+.registro-title img { max-width:600px; width:100%; }
+
+/* ─── ORGANIZADORES ─── */
+.org-section {
+  position:relative;
+  background:#1a1466;
+  padding:40px 5% 50px;
+  overflow:hidden;
+}
+.org-watermark {
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:80%;
+  opacity:0.08;
+  pointer-events:none;
+}
+.org-title {
+  text-align:center;
+  margin-bottom:36px;
+}
+.org-title img { max-width:700px; width:100%; }
+.org-grid {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  gap:32px 48px;
+  max-width:1100px;
+  margin:0 auto;
+  position:relative;
+  z-index:1;
+}
+.org-grid img {
+  max-height:80px;
+  max-width:200px;
+  width:auto;
+  object-fit:contain;
+  filter:brightness(1.05);
+}
+.org-divider {
+  width:100%;
+  height:1px;
+  background:rgba(255,255,255,0.12);
+  margin:12px 0;
+}
+
+/* ─── PATROCINADORES ─── */
+.patro-section {
+  background:#1a1466;
+  padding:40px 5% 60px;
+  border-top:2px solid rgba(247,194,1,0.25);
+}
+.patro-title {
+  text-align:center;
+  margin-bottom:8px;
+}
+.patro-title img { max-width:700px; width:100%; }
+.patro-unete {
+  text-align:center;
+  margin-bottom:32px;
+}
+.patro-unete img { max-width:260px; width:100%; }
+.patro-grid {
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:14px;
+  max-width:1100px;
+  margin:0 auto 30px;
+}
+.patro-box {
+  border:2px dashed rgba(255,255,255,0.3);
+  border-radius:10px;
+  height:90px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:border-color .2s;
+  cursor:pointer;
+}
+.patro-box:hover { border-color:rgba(247,194,1,0.5); }
+
+/* ─── CONTACTO ─── */
+.contacto-section {
+  position: relative;
+  background: #2b1f85; 
+  padding: 60px 5%;
+  overflow: hidden;
+  border-top: 2px solid rgba(255,255,255,0.05);
+}
+.contacto-title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 50px;
+}
+.contacto-title-container .rayos {
+  position: absolute;
+  width: 100%;
+  max-width: 380px; 
+  z-index: 1;
+}
+.contacto-grid {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 50px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.contacto-izq {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding-right: 20px;
+}
+.contacto-izq .corazon { height: 50px; }
+.contacto-izq .logo-principal {
+  max-width: 320px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.contacto-izq .redes {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-end; 
+  width: 100%;
+}
+.contacto-izq .redes img { height: 30px; object-fit: contain; }
+.contacto-divisor {
+  width: 2px;
+  background: white;
+  opacity: 0.7;
+  border-radius: 2px;
+}
+.contacto-der {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  padding-left: 20px;
+}
+.contacto-der .logo-trans {
+  height: 40px;
+  align-self: center; 
+  margin-bottom: 15px;
+}
+.contacto-der .redes {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-start;
+}
+.contacto-der .redes img { height: 30px; object-fit: contain; }
+
+/* ========================================================
+   MEDIA QUERIES (PÁGINA RESPONSIVA)
+   ======================================================== */
+
+/* Adaptación para Tablets (Max 992px) */
+@media (max-width: 992px) {
+  .hero-content { width: 100%; z-index: 5; text-align: center; align-items: center; }
+  .hero-visuals { opacity: 0.4; } /* Para que no estorbe al texto en móvil */
+  
+  .panels-row, .panels-row-2 { flex-wrap: wrap; }
+  .panel-item { max-width: 48%; margin-bottom: 15px; }
+  
+  .patro-grid { grid-template-columns: repeat(2, 1fr); }
+  
+  .contacto-grid { flex-direction: column; align-items: center; gap: 30px; }
+  .contacto-izq, .contacto-der { padding: 0; align-items: center; }
+  .contacto-izq .redes, .contacto-der .redes { align-items: center; }
+  .contacto-divisor { width: 80%; height: 2px; }
+}
+
+/* Adaptación para Celulares (Max 768px) y Menú Baguette */
+@media (max-width: 768px) {
+  .navbar { padding: 10px 20px; }
+  
+  /* Activamos el botón baguette */
+  .menu-toggle { display: block; }
+  
+  /* Transformamos los enlaces en un menú desplegable */
+  .nav-links {
+    display: none; /* Oculto por defecto */
+    flex-direction: column;
+    position: absolute;
+    top: 70px; /* Debajo del navbar */
+    left: 0;
+    width: 100%;
+    background: #1a1466;
+    padding: 20px 0;
+    gap: 20px;
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+  
+  /* Clase que se activa con JavaScript */
+  .nav-links.active { display: flex; }
+  
+  /* Ocultar temporalmente donar o ajustarlo */
+  .nav-donar { display: none; } 
+  
+  .panel-item { max-width: 100%; }
+  
+  .patro-grid { grid-template-columns: repeat(1, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-logo"><img src="cabezera_1.png" alt="Carrera Mexi Teletón 2026"></div>
+  
+  <button class="menu-toggle" id="mobile-menu-btn">&#9776;</button>
+
+  <nav class="nav-links" id="nav-links">
+    <a href="#informacion"><img src="cabecera_2.png" alt="Información"></a>
+    <a href="#inscripcion"><img src="cabecera_3.png" alt="Inscripción"></a>
+    <a href="#organizadores"><img src="cabezera4.png" alt="Organizadores"></a>
+    <a href="#patrocinadores"><img src="cabecera_5.png" alt="Patrocinadores"></a>
+    <a href="#contacto"><img src="cabecera_6.png" alt="Contacto"></a>
+  </nav>
+  
+  <div class="nav-donar"><img src="recurso_49.png" alt="Donar"></div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+   <div class="hero-main-logo"> 
+      <img src="logo_1.png" alt="Logo Hero">
+    </div>
+    <div class="hero-cta">
+      <img src="inscribete.png" alt="Inscríbete">
+    </div>
+  </div>
+  <div class="hero-visuals">
+    <img class="runner" src="corredor.png" alt="Corredor">
+    <img class="hexagono" src="recurso_48.png" alt="Hexágono">
+  </div>
+</section>
+
+<div id="informacion" class="panels-row">
+  <div class="panel-item"><img src="m1.png" alt="Distancias"></div>
+  <div class="panel-item"><img src="m2.png" alt="Ruta"></div>
+  <div class="panel-item"><img src="m3.png" alt="Categorías"></div>
+</div>
+
+<div class="panels-row-2">
+  <div class="panel-item"><img src="m4.png" alt="Puntos de Hidratacion"></div>
+  <div class="panel-item"><img src="m5.png" alt="Informacion"></div>
+  <div class="panel-item"><img src="m6.png" alt="Kit corredor"></div>
+</div>
+
+<section id="organizadores" class="org-section">
+  <img class="org-watermark" src="logo_transparente.png" alt="">
+
+  <div class="org-title">
+    <img src="organizadores.png" alt="Organizadores">
+  </div>
+
+  <div class="org-grid">
+    <img src="transcomunicador.png" alt="transcomunicador">
+    <img src="acentro_de_autismo.png" alt="Centro Autismo">
+    <img src="edomex.png" alt="Edomex">
+    <div class="org-divider" style="flex-basis:100%;"></div>
+    <img src="ecatepec.png" alt="Ecatepec">
+    <img src="coacalco.png" alt="Coacalco">
+    <img src="tultitlan.png" alt="Tultitlan">
+    <div class="org-divider" style="flex-basis:100%;"></div>
+    <img src="movilidad.png" alt="Movilidad">
+    <img src="sitramitem.png" alt="Sitramytem">
+    <img src="urbanbus.png" alt="Urbanbus">
+  </div>
+</section>
+
+<section id="patrocinadores" class="patro-section">
+  <img class="org-watermark" src="logo_transparente.png" alt="">
+  
+  <div class="patro-title">
+    <img src="patrocinadores.png" alt="Patrocinadores">
+  </div>
+  
+  <div class="patro-unete">
+    <img src="unete.png" alt="Únete">
+  </div>
+
+  <div class="patro-grid">
+    <div class="patro-box"></div><div class="patro-box"></div><div class="patro-box"></div><div class="patro-box"></div><div class="patro-box"></div><div class="patro-box"></div><div class="patro-box"></div><div class="patro-box"></div><div class="patro-box"></div><div class="patro-box"></div><div class="patro-box"></div><div class="patro-box"></div><div class="patro-box"></div><div class="patro-box"></div><div class="patro-box"></div><div class="patro-box"></div>
+  </div>
+</section>
+
+<section id="contacto" class="contacto-section">
+  
+  <div class="contacto-title-container">
+    <img class="rayos" src="recurso_50.png" alt="Rayos">
+  </div>
+
+  <div class="contacto-grid">
+    
+    <div class="contacto-izq">
+      <img class="corazon" src="recurso_51.png" alt="Corazón">
+      <img class="logo-principal" src="recurso_53.png" alt="Autismo Teletón">
+      
+      <div class="redes">
+        <img src="recurso_54.png" alt="Facebook Centro Autismo Teletón">
+        <img src="recurso_55.png" alt="Instagram Autismo Teletón">
+      </div>
+    </div>
+
+    <div class="contacto-divisor"></div>
+
+    <div class="contacto-der">
+      <img class="logo-trans" src="transcomunicador.png" alt="Transcomunicador">
+      
+      <div class="redes">
+        <img src="recurso_57.png" alt="Correo Electrónico">
+        <img src="recurso_58.png" alt="WhatsApp">
+        <img src="recurso_59.png" alt="Facebook Mexibus">
+        <img src="recurso_60.png" alt="Instagram Mexibus">
+        <img src="recurso_61.png" alt="X Mexibus">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const navLinks = document.getElementById('nav-links');
+
+  // Alterna la clase 'active' para mostrar u ocultar el menú
+  mobileBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+
+  // Oculta el menú automáticamente al hacer clic en un enlace (ideal para móviles)
+  navLinks.addEventListener('click', (e) => {
+    if (e.target.tagName.toLowerCase() === 'img') {
+      navLinks.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
