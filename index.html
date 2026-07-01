@@ -15,7 +15,6 @@ body {
   background:#1a1466; 
   overflow-x:hidden; 
   font-family:Arial, sans-serif; 
-  /* Eliminado el min-width de 1200px para permitir adaptabilidad */
 }
 
 /* ─── NAVBAR ─── */
@@ -46,7 +45,7 @@ body {
 .nav-donar img { height:52px; cursor:pointer; transition:transform .2s; }
 .nav-donar img:hover { transform:scale(1.05); }
 
-/* ─── BOTÓN MENÚ BAGUETTE (Oculto en escritorio) ─── */
+/* ─── BOTÓN MENÚ BAGUETTE ─── */
 .menu-toggle {
   display: none;
   background: none;
@@ -337,6 +336,7 @@ body {
 }
 .contacto-der .redes img { height: 30px; object-fit: contain; }
 
+
 /* ========================================================
    MEDIA QUERIES (PÁGINA RESPONSIVA)
    ======================================================== */
@@ -344,32 +344,27 @@ body {
 /* Adaptación para Tablets (Max 992px) */
 @media (max-width: 992px) {
   .hero-content { width: 100%; z-index: 5; text-align: center; align-items: center; }
-  .hero-visuals { opacity: 0.4; } /* Para que no estorbe al texto en móvil */
-  
+  .hero-visuals { opacity: 0.6; }
   .panels-row, .panels-row-2 { flex-wrap: wrap; }
   .panel-item { max-width: 48%; margin-bottom: 15px; }
-  
   .patro-grid { grid-template-columns: repeat(2, 1fr); }
-  
   .contacto-grid { flex-direction: column; align-items: center; gap: 30px; }
   .contacto-izq, .contacto-der { padding: 0; align-items: center; }
   .contacto-izq .redes, .contacto-der .redes { align-items: center; }
   .contacto-divisor { width: 80%; height: 2px; }
 }
 
-/* Adaptación para Celulares (Max 768px) y Menú Baguette */
+/* Adaptación para Celulares (Max 768px) */
 @media (max-width: 768px) {
   .navbar { padding: 10px 20px; }
   
-  /* Activamos el botón baguette */
   .menu-toggle { display: block; }
   
-  /* Transformamos los enlaces en un menú desplegable */
   .nav-links {
-    display: none; /* Oculto por defecto */
+    display: none;
     flex-direction: column;
     position: absolute;
-    top: 70px; /* Debajo del navbar */
+    top: 70px;
     left: 0;
     width: 100%;
     background: #1a1466;
@@ -379,13 +374,42 @@ body {
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   }
   
-  /* Clase que se activa con JavaScript */
   .nav-links.active { display: flex; }
-  
-  /* Ocultar temporalmente donar o ajustarlo */
   .nav-donar { display: none; } 
-  
-  .panel-item { max-width: 100%; }
+
+  /* CORRECCIÓN: Separar elementos del Hero para evitar encimados */
+  .hero {
+    padding-bottom: 150px; /* Le da espacio abajo para que quepa el hexágono */
+  }
+  .hero-cta img {
+    max-width: 90%; /* Evita que el botón se desborde */
+  }
+  .hero-visuals {
+    width: 100%;
+    opacity: 1; /* Mantiene legible el precio */
+  }
+  .runner {
+    opacity: 0.15; /* Difuminamos al corredor para no hacer ruido con el texto */
+  }
+  .hexagono {
+    width: 140px;
+    right: 50%;
+    transform: translateX(50%); /* Lo centra perfectamente a la mitad */
+    bottom: 20px; /* Lo coloca justo por debajo del botón Inscríbete */
+  }
+
+  /* CORRECCIÓN: Forzar tarjetas de Distancias/Ruta/Categorías en columna */
+  .panels-row, .panels-row-2 { 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 20px;
+    padding: 20px 5%;
+  }
+  .panel-item { 
+    max-width: 100%; 
+    width: 100%; 
+    flex: none; /* Anula el flex horizontal de escritorio */
+  }
   
   .patro-grid { grid-template-columns: repeat(1, 1fr); }
 }
@@ -513,12 +537,10 @@ body {
   const mobileBtn = document.getElementById('mobile-menu-btn');
   const navLinks = document.getElementById('nav-links');
 
-  // Alterna la clase 'active' para mostrar u ocultar el menú
   mobileBtn.addEventListener('click', () => {
     navLinks.classList.toggle('active');
   });
 
-  // Oculta el menú automáticamente al hacer clic en un enlace (ideal para móviles)
   navLinks.addEventListener('click', (e) => {
     if (e.target.tagName.toLowerCase() === 'img') {
       navLinks.classList.remove('active');
