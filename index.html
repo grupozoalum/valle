@@ -55,91 +55,75 @@ body {
   cursor: pointer;
 }
 
-/* ─── HERO ─── */
+/* ─── HERO (VISTA ESCRITORIO CORREGIDA) ─── */
 .hero {
-  position:relative;
-  width:100%;
-  min-height:600px;
-  background-image:url('fondo.png');
-  background-size:cover;
-  background-position:center top;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  padding:40px 5%;
+  position: relative;
+  width: 100%;
+  min-height: 650px; /* Altura ajustada para dar espacio al corredor */
+  background-image: url('fondo.png');
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 0 5%;
 }
 .hero::before {
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to right, rgba(15,8,90,0.7) 40%, rgba(15,8,90,0.1) 100%);
-  z-index:1;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(15,8,90,0.7) 40%, rgba(15,8,90,0.1) 100%);
+  z-index: 1;
 }
 .hero-content {
   position: relative;
-  z-index: 3;
-  width: 58%;
+  z-index: 5;
+  width: 55%; /* Ocupa un poco más de la mitad izquierda */
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 15px;
 }
-.hero-date {
-  display:flex;
-  align-items:center;
-  gap:10px;
-  color:#f7c201;
-  font-size:2.4rem;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:2px;
+.hero-main-logo img { 
+  width: 100%; 
+  max-width: 720px; /* Tamaño máximo del texto/logos para que se vea grande */
+  height: auto;
 }
-.hero-date img { height:22px; }
-.hero-logos {
-  display:flex;
-  align-items:center;
-  gap:20px;
+.hero-cta {
+  margin-top: 10px;
 }
-.hero-logos img { height:56px; }
-.hero-main-logo img { width:100%; max-width:620px; }
-.hero-subtitles {
-  color:white;
-  font-size:0.9rem;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  line-height:1.6;
+.hero-cta img { 
+  width: 100%;
+  max-width: 320px; /* Tamaño del botón Inscríbete */
+  cursor: pointer; 
+  transition: transform .2s; 
+  object-fit: contain; 
 }
-.hero-subtitles span.yellow { color:#f7c201; }
-.hero-subtitles .solidarity {
-  font-size:0.85rem;
-  color:#f7c201;
-}
-.hero-cta img { height:62px; cursor:pointer; transition:transform .2s; margin-top:6px; max-width: 100%; object-fit: contain; }
 .hero-cta img:hover { transform:scale(1.05); }
+
 .hero-visuals {
   position: absolute;
-  right: 0%;
+  right: 0;
   bottom: 0;
-  width: 60%;
+  width: 50%; /* Ocupa la mitad derecha estricta */
   height: 100%;
   z-index: 4;
   pointer-events: none;
 }
 .runner {
   position: absolute;
-  right: 8%;
+  right: -2%;
   bottom: -5%;
-  height: 115%;
+  height: 115%; /* Hace que sobresalga un poco como en tu imagen */
   object-fit: contain;
 }
 .hexagono {
   position: absolute;
-  bottom: 8%;
-  right: 55%;
-  width: 175px;
-  z-index: 4;
-  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
+  bottom: 12%; 
+  left: 0; /* Lo alinea exactamente a la mitad de la pantalla chocando con la pierna */
+  width: 240px; 
+  z-index: 5;
   pointer-events: auto;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
 }
 
 /* ─── SECCIÓN PANELES ─── */
@@ -345,6 +329,7 @@ body {
 @media (max-width: 992px) {
   .hero-content { width: 100%; z-index: 5; text-align: center; align-items: center; }
   .hero-visuals { opacity: 0.6; }
+  .hexagono { left: 10%; bottom: 5%; }
   .panels-row, .panels-row-2 { flex-wrap: wrap; }
   .panel-item { max-width: 48%; margin-bottom: 15px; }
   .patro-grid { grid-template-columns: repeat(2, 1fr); }
@@ -377,28 +362,39 @@ body {
   .nav-links.active { display: flex; }
   .nav-donar { display: none; } 
 
-  /* CORRECCIÓN: Separar elementos del Hero para evitar encimados */
+  /* HERO EN CELULARES */
   .hero {
-    padding-bottom: 150px; /* Le da espacio abajo para que quepa el hexágono */
+    min-height: auto;
+    padding-top: 40px;
+    padding-bottom: 250px; /* Da espacio inferior para que quepa el precio */
+    align-items: flex-start;
   }
-  .hero-cta img {
-    max-width: 90%; /* Evita que el botón se desborde */
+  .hero-content {
+    width: 100%;
+    align-items: center;
   }
+  .hero-cta img { max-width: 90%; }
+  
   .hero-visuals {
     width: 100%;
-    opacity: 1; /* Mantiene legible el precio */
+    height: 250px; /* Zona exclusiva abajo para las imágenes del héroe */
+    bottom: 0;
+    opacity: 1; /* Retornamos la opacidad */
   }
   .runner {
-    opacity: 0.15; /* Difuminamos al corredor para no hacer ruido con el texto */
+    right: -10%;
+    bottom: 0;
+    height: 100%;
+    opacity: 0.15; /* Corredor difuminado atrás del hexágono para no estorbar la lectura */
   }
   .hexagono {
-    width: 140px;
-    right: 50%;
-    transform: translateX(50%); /* Lo centra perfectamente a la mitad */
-    bottom: 20px; /* Lo coloca justo por debajo del botón Inscríbete */
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px; 
+    width: 150px;
   }
 
-  /* CORRECCIÓN: Forzar tarjetas de Distancias/Ruta/Categorías en columna */
+  /* PANELES EN COLUMNA PARA CELULAR */
   .panels-row, .panels-row-2 { 
     flex-direction: column; 
     align-items: center; 
@@ -408,7 +404,7 @@ body {
   .panel-item { 
     max-width: 100%; 
     width: 100%; 
-    flex: none; /* Anula el flex horizontal de escritorio */
+    flex: none;
   }
   
   .patro-grid { grid-template-columns: repeat(1, 1fr); }
