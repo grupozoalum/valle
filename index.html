@@ -60,86 +60,69 @@ body {
 }
 
 /* ══════════════════════════════════════════════════════════
-   HERO — reconstruido para calzar con el mockup:
-   - hero-content: bloque de texto + botón, arriba-izquierda,
-     SIN estirarse a max-width gigante (eso separaba
-     demasiado el texto del botón y descuadraba todo).
-   - hero-visuals: el corredor sangra fuera del hero por la
-     derecha y abajo (igual que en la captura).
-   - hexagono: ya NO está anclado al borde izquierdo de la
-     mitad derecha (eso lo pegaba casi al centro-izquierda).
-     Ahora se ancla desde la DERECHA del hero completo, para
-     quedar sobre la pierna del corredor, como en el mockup.
+   HERO — lienzo de proporción FIJA.
+   En vez de layout responsivo (flex que reacomoda cosas según
+   el ancho), el hero es un "canvas" con aspect-ratio fijo y
+   CADA elemento se posiciona con PORCENTAJES dentro de él.
+   Resultado: la composición completa (texto, botón, corredor,
+   hexágono) es siempre la misma, en cualquier tamaño de
+   pantalla — solo escala como una fotografía, nunca se separa,
+   se monta ni cambia de orden.
+   Los % de abajo están calibrados sobre la proporción del
+   mockup de referencia (~1136 x 517, ratio ≈ 2.2 / 1).
    ══════════════════════════════════════════════════════════ */
 .hero {
   position: relative;
   width: 100%;
-  min-height: 560px;
+  aspect-ratio: 1136 / 517;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  padding: 40px 5%;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 5;
-  width: 56%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 18px;
 }
 
 .hero-main-logo {
-  width: 100%;
+  position: absolute;
+  left: 8%;
+  top: 6%;
+  width: 46%;
+  z-index: 5;
 }
 .hero-main-logo img {
   display: block;
   width: 100%;
-  max-width: 620px; /* antes 750px: se veía desproporcionado vs. el botón */
   height: auto;
 }
 
 .hero-cta {
-  margin-top: 0; /* el propio logo_1.png ya trae aire abajo si lo exportaste con el texto pequeño incluido */
+  position: absolute;
+  left: 8%;
+  top: 70%;
+  width: 27%;
+  z-index: 5;
 }
 .hero-cta img {
   display: block;
   width: 100%;
-  max-width: 300px; /* proporcional al ancho del logo de arriba */
   cursor: pointer;
   transition: transform .2s;
   object-fit: contain;
 }
 .hero-cta img:hover { transform: scale(1.05); }
 
-/* Visuales de la derecha (Corredor y Hexágono) */
-.hero-visuals {
-  position: absolute;
-  inset: 0; /* ocupa TODO el hero, no solo la mitad derecha */
-  z-index: 4;
-  pointer-events: none;
-}
-
 .runner {
   position: absolute;
-  right: -6%;
-  bottom: -6%;
-  height: 115%;
+  right: -3%;
+  bottom: -3%;
+  height: 106%;
   width: auto;
   object-fit: contain;
+  z-index: 4;
 }
 
 .hexagono {
   position: absolute;
-  right: 12%;      /* medido desde el borde derecho del hero completo */
-  bottom: 6%;
-  width: 20%;
-  max-width: 230px;
-  min-width: 170px;
+  right: 10%;
+  bottom: 8%;
+  width: 19%;
   z-index: 6;
-  pointer-events: auto;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
 }
 
@@ -343,10 +326,7 @@ body {
 /* Adaptación para Tablets (Max 992px) */
 @media (max-width: 992px) {
   body { background-size: 150% auto; } 
-  .hero-content { width: 100%; z-index: 5; text-align: center; align-items: center; }
-  .hero-visuals { opacity: 0.6; }
-  .hexagono { right: 6%; bottom: 4%; }
-  
+
   .panels-row, .panels-row-2 { flex-wrap: wrap; }
   .panel-item { max-width: 48%; margin-bottom: 15px; }
   .patro-grid { grid-template-columns: repeat(2, 1fr); }
@@ -379,48 +359,6 @@ body {
   
   .nav-links.active { display: flex; }
   .nav-donar { display: none; } 
-
-  .hero {
-    flex-direction: column;
-    min-height: auto;
-    padding: 30px 5% 20px;
-    align-items: center;
-  }
-  .hero-content {
-    width: 100%;
-    align-items: center;
-    text-align: center;
-    order: 1; /* texto + botón SIEMPRE primero en mobile */
-  }
-  .hero-cta img { max-width: 90%; }
-
-  /* En mobile los visuales ya NO son un overlay absoluto sobre
-     todo el hero (eso era lo que generaba el hueco vacío arriba
-     del hexágono). Ahora son un bloque normal que fluye justo
-     debajo del botón, con el corredor a color de fondo. */
-  .hero-visuals {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    height: 340px;
-    margin-top: 10px;
-    order: 2; /* corredor + hexágono SIEMPRE después del texto en mobile */
-  }
-  .runner {
-    right: -8%;
-    bottom: 0;
-    height: 100%;
-    opacity: 1;
-  }
-  .hexagono {
-    left: 50%;
-    right: auto;
-    bottom: 20px;
-    transform: translateX(-50%);
-    width: 170px;
-    max-width: 170px;
-    min-width: 170px;
-  }
 
   .panels-row, .panels-row-2 { 
     flex-direction: column; 
