@@ -59,70 +59,86 @@ body {
   cursor: pointer;
 }
 
-/* ─── HERO (DISEÑO MILIMÉTRICO PARA PORTADA) ─── */
+/* ══════════════════════════════════════════════════════════
+   HERO — reconstruido para calzar con el mockup:
+   - hero-content: bloque de texto + botón, arriba-izquierda,
+     SIN estirarse a max-width gigante (eso separaba
+     demasiado el texto del botón y descuadraba todo).
+   - hero-visuals: el corredor sangra fuera del hero por la
+     derecha y abajo (igual que en la captura).
+   - hexagono: ya NO está anclado al borde izquierdo de la
+     mitad derecha (eso lo pegaba casi al centro-izquierda).
+     Ahora se ancla desde la DERECHA del hero completo, para
+     quedar sobre la pierna del corredor, como en el mockup.
+   ══════════════════════════════════════════════════════════ */
 .hero {
   position: relative;
   width: 100%;
-  min-height: 650px; 
+  min-height: 560px;
   overflow: hidden;
   display: flex;
   align-items: center;
-  padding: 0 5%;
+  padding: 40px 5%;
 }
+
 .hero-content {
   position: relative;
   z-index: 5;
-  width: 55%; /* Se asegura de que el texto y botón tomen la mitad izquierda */
+  width: 56%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Alinea los elementos a la izquierda estrictamente */
-  gap: 15px;
+  align-items: flex-start;
+  gap: 18px;
 }
-.hero-main-logo img { 
-  width: 100%; 
-  max-width: 750px; /* Permite que el texto sea grande e imponente */
+
+.hero-main-logo {
+  width: 100%;
+}
+.hero-main-logo img {
+  display: block;
+  width: 100%;
+  max-width: 620px; /* antes 750px: se veía desproporcionado vs. el botón */
   height: auto;
 }
+
 .hero-cta {
-  margin-top: 5px;
-  padding-left: 2%; /* Pequeño margen para alinear perfecto con el texto de arriba */
+  margin-top: 0; /* el propio logo_1.png ya trae aire abajo si lo exportaste con el texto pequeño incluido */
 }
-.hero-cta img { 
+.hero-cta img {
+  display: block;
   width: 100%;
-  max-width: 360px; /* Tamaño ideal para el botón */
-  cursor: pointer; 
-  transition: transform .2s; 
-  object-fit: contain; 
+  max-width: 300px; /* proporcional al ancho del logo de arriba */
+  cursor: pointer;
+  transition: transform .2s;
+  object-fit: contain;
 }
 .hero-cta img:hover { transform: scale(1.05); }
 
 /* Visuales de la derecha (Corredor y Hexágono) */
 .hero-visuals {
   position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 50%; /* Exclusivamente la mitad derecha */
-  height: 100%;
+  inset: 0; /* ocupa TODO el hero, no solo la mitad derecha */
   z-index: 4;
   pointer-events: none;
 }
+
 .runner {
   position: absolute;
-  right: -5%; /* Lo empuja un poco a la derecha para que corte bien */
-  bottom: -5%; /* Permite que el pie descanse al ras */
-  height: 110%; /* Más alto que el contenedor para lograr ese corte dinámico */
+  right: -6%;
+  bottom: -6%;
+  height: 115%;
   width: auto;
   object-fit: contain;
 }
+
 .hexagono {
   position: absolute;
-  bottom: 12%; 
-  /* Posicionamiento clave: lo ancla a la izquierda de su mitad de pantalla (pegado al botón) */
-  left: -2%; 
-  width: 25vw; /* Tamaño dinámico basado en la pantalla */
-  max-width: 250px; 
-  min-width: 180px;
-  z-index: 5;
+  right: 12%;      /* medido desde el borde derecho del hero completo */
+  bottom: 6%;
+  width: 20%;
+  max-width: 230px;
+  min-width: 170px;
+  z-index: 6;
   pointer-events: auto;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
 }
@@ -328,9 +344,8 @@ body {
 @media (max-width: 992px) {
   body { background-size: 150% auto; } 
   .hero-content { width: 100%; z-index: 5; text-align: center; align-items: center; }
-  .hero-cta { padding-left: 0; }
   .hero-visuals { opacity: 0.6; }
-  .hexagono { left: 10%; bottom: 5%; }
+  .hexagono { right: 6%; bottom: 4%; }
   
   .panels-row, .panels-row-2 { flex-wrap: wrap; }
   .panel-item { max-width: 48%; margin-bottom: 15px; }
@@ -378,9 +393,9 @@ body {
   .hero-cta img { max-width: 90%; }
   
   .hero-visuals {
-    width: 100%;
     height: 250px; 
     bottom: 0;
+    top: auto;
     opacity: 1; 
   }
   .runner {
@@ -391,6 +406,7 @@ body {
   }
   .hexagono {
     left: 50%;
+    right: auto;
     transform: translateX(-50%);
     bottom: 20px; 
     width: 150px;
@@ -433,6 +449,10 @@ body {
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
+  <div class="hero-visuals">
+    <img class="runner" src="corredor.png" alt="Corredor">
+    <img class="hexagono" src="recurso_48.png" alt="Hexágono">
+  </div>
   <div class="hero-content">
    <div class="hero-main-logo"> 
       <img src="logo_1.png" alt="Logo Hero">
@@ -440,10 +460,6 @@ body {
     <div class="hero-cta">
       <img src="inscribete.png" alt="Inscríbete">
     </div>
-  </div>
-  <div class="hero-visuals">
-    <img class="runner" src="corredor.png" alt="Corredor">
-    <img class="hexagono" src="recurso_48.png" alt="Hexágono">
   </div>
 </section>
 
