@@ -10,13 +10,13 @@ html {
   scroll-behavior: smooth;
 }
 
-/* ─── BODY (FONDO FIJO PARA QUE NO SE CORTE) ─── */
+/* ─── BODY (FONDO UNIFICADO) ─── */
 body { 
   background-color: #3b1959; 
-  background-image: url('fondo.jpg');
-  background-size: cover; /* Cubre toda la pantalla sin deformarse */
-  background-attachment: fixed; /* El fondo se queda quieto al hacer scroll */
-  background-position: center;
+  background-image: url('fondo.png');
+  background-size: cover;
+  background-attachment: fixed; 
+  background-position: top center;
   background-repeat: no-repeat;
   overflow-x: hidden; 
   font-family: Arial, sans-serif; 
@@ -60,80 +60,74 @@ body {
   cursor: pointer;
 }
 
-/* ─── HERO (SOLUCIÓN PANTALLAS GIGANTES) ─── */
+/* ══════════════════════════════════════════════════════════
+   HERO — lienzo de proporción FIJA.
+   En vez de layout responsivo (flex que reacomoda cosas según
+   el ancho), el hero es un "canvas" con aspect-ratio fijo y
+   CADA elemento se posiciona con PORCENTAJES dentro de él.
+   Resultado: la composición completa (texto, botón, corredor,
+   hexágono) es siempre la misma, en cualquier tamaño de
+   pantalla — solo escala como una fotografía, nunca se separa,
+   se monta ni cambia de orden.
+   Los % de abajo están calibrados sobre la proporción del
+   mockup de referencia (~1136 x 517, ratio ≈ 2.2 / 1).
+   ══════════════════════════════════════════════════════════ */
 .hero {
   position: relative;
-  width: 100%; /* Abarca el 100% para que NO haya líneas de corte */
-  min-height: 650px; 
-  overflow: hidden; /* Corta solo a las orillas de la PANTALLA, no en el centro */
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Centra la caja interna */
-}
-
-/* Esta caja invisible mantiene el texto y corredor juntos */
-.hero-container {
-  position: relative;
   width: 100%;
-  max-width: 1200px; /* Tope para que no se separen al infinito */
-  min-height: 650px; 
-  display: flex;
-  align-items: center;
-  padding: 0 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+  aspect-ratio: 1136 / 517;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
 }
 
-.hero-content {
-  position: relative;
+.hero-main-logo {
+  position: absolute;
+  left: 8%;
+  top: 6%;
+  width: 46%;
   z-index: 5;
-  width: 58%; 
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 15px;
 }
-.hero-main-logo img { 
-  width: 100%; 
-  max-width: 700px; 
+.hero-main-logo img {
+  display: block;
+  width: 100%;
   height: auto;
 }
+
 .hero-cta {
-  margin-top: 5px;
+  position: absolute;
+  left: 8%;
+  top: 70%;
+  width: 27%;
+  z-index: 5;
 }
-.hero-cta img { 
+.hero-cta img {
+  display: block;
   width: 100%;
-  max-width: 320px; 
-  cursor: pointer; 
-  transition: transform .2s; 
-  object-fit: contain; 
+  cursor: pointer;
+  transition: transform .2s;
+  object-fit: contain;
 }
 .hero-cta img:hover { transform: scale(1.05); }
 
-/* Visuales de la derecha (Corredor y Hexágono) */
-.hero-visuals {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 42%; /* Mitad derecha de la caja central */
-  height: 100%;
-  z-index: 4;
-  pointer-events: none;
-}
 .runner {
   position: absolute;
-  right: -5%; /* Sobresale un poquito a la derecha para verse dinámico */
-  bottom: -5%; 
-  height: 110%; 
+  right: -3%;
+  bottom: -3%;
+  height: 106%;
   width: auto;
   object-fit: contain;
-  object-position: right bottom; 
+  z-index: 4;
 }
+
 .hexagono {
   position: absolute;
-  bottom: 12%; 
-  left: -12%; /* Jala el hexágono hacia el texto */
-  width: 220px; 
-  z-index: 5;
-  pointer-events: auto;
+  right: 10%;
+  bottom: 8%;
+  width: 19%;
+  z-index: 6;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
 }
 
@@ -145,6 +139,8 @@ body {
   padding: 28px 2% 8px;
   justify-content: center;
   align-items: flex-start;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 .panels-row-2 { padding: 8px 2% 28px; }
 .panel-item {
@@ -178,6 +174,12 @@ body {
   background: transparent;
   padding: 40px 5% 50px;
   overflow: hidden;
+  min-height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .org-watermark {
   position: absolute;
@@ -222,6 +224,12 @@ body {
 .patro-section {
   background: transparent;
   padding: 40px 5% 60px;
+  min-height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .patro-title {
   text-align: center;
@@ -258,6 +266,12 @@ body {
   background: transparent; 
   padding: 60px 5%;
   overflow: hidden;
+  min-height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .contacto-title-container {
   display: flex;
@@ -334,9 +348,23 @@ body {
    MEDIA QUERIES (PÁGINA RESPONSIVA)
    ======================================================== */
 
-/* 1. TABLETS Y CELULARES ACOSTADOS (Max 1050px) 
-   ¡Esta es la corrección! El menú baguette se activa antes para evitar desbordes */
-@media (max-width: 1050px) {
+/* Adaptación para Tablets (Max 992px) */
+@media (max-width: 992px) {
+  
+
+  .panels-row, .panels-row-2 { flex-wrap: wrap; }
+  .panel-item { max-width: 48%; margin-bottom: 15px; }
+  .patro-grid { grid-template-columns: repeat(2, 1fr); }
+  .contacto-grid { flex-direction: column; align-items: center; gap: 30px; }
+  .contacto-izq, .contacto-der { padding: 0; align-items: center; }
+  .contacto-izq .redes, .contacto-der .redes { align-items: center; }
+  .contacto-divisor { width: 80%; height: 2px; }
+}
+
+/* Adaptación para Celulares (Max 768px) */
+@media (max-width: 768px) {
+   
+  
   .navbar { padding: 10px 20px; }
   .menu-toggle { display: block; }
   
@@ -357,58 +385,6 @@ body {
   .nav-links.active { display: flex; }
   .nav-donar { display: none; } 
 
-  .hero-content { width: 100%; z-index: 5; text-align: center; align-items: center; }
-  .hero-cta { padding-left: 0; }
-  .hero-visuals { opacity: 0.6; }
-  .hexagono { left: 10%; bottom: 5%; }
-  
-  .panels-row, .panels-row-2 { flex-wrap: wrap; }
-  .panel-item { max-width: 48%; margin-bottom: 15px; }
-  .patro-grid { grid-template-columns: repeat(2, 1fr); }
-  .contacto-grid { flex-direction: column; align-items: center; gap: 30px; }
-  .contacto-izq, .contacto-der { padding: 0; align-items: center; }
-  .contacto-izq .redes, .contacto-der .redes { align-items: center; }
-  .contacto-divisor { width: 80%; height: 2px; }
-}
-
-/* 2. CELULARES EN VERTICAL (Max 768px) */
-@media (max-width: 768px) {
-  .hero {
-    min-height: auto;
-  }
-  
-  .hero-container {
-    min-height: auto;
-    padding-top: 40px;
-    padding-bottom: 250px; 
-    flex-direction: column;
-  }
-  
-  .hero-content {
-    width: 100%;
-    align-items: center;
-  }
-  .hero-cta img { max-width: 90%; }
-  
-  .hero-visuals {
-    width: 100%;
-    height: 250px; 
-    bottom: 0;
-    opacity: 1; 
-  }
-  .runner {
-    right: -10%;
-    bottom: 0;
-    height: 100%;
-    opacity: 0.15; 
-  }
-  .hexagono {
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 20px; 
-    width: 150px;
-  }
-
   .panels-row, .panels-row-2 { 
     flex-direction: column; 
     align-items: center; 
@@ -427,6 +403,7 @@ body {
 </head>
 <body>
 
+<!-- ═══ NAVBAR ═══ -->
 <header class="navbar">
   <div class="nav-logo"><img src="cabezera_1.png" alt="Carrera Mexi Teletón 2026"></div>
   
@@ -443,35 +420,37 @@ body {
   <div class="nav-donar"><img src="recurso_49.png" alt="Donar"></div>
 </header>
 
+<!-- ═══ HERO ═══ -->
 <section class="hero">
-  <div class="hero-container">
-    <div class="hero-content">
-     <div class="hero-main-logo"> 
-        <img src="logo_1.png" alt="Logo Hero">
-      </div>
-      <div class="hero-cta">
-        <img src="inscribete.png" alt="Inscríbete">
-      </div>
+  <div class="hero-visuals">
+    <img class="runner" src="corredor.png" alt="Corredor">
+    <img class="hexagono" src="recurso_48.png" alt="Hexágono">
+  </div>
+  <div class="hero-content">
+   <div class="hero-main-logo"> 
+      <img src="logo_1.png" alt="Logo Hero">
     </div>
-    <div class="hero-visuals">
-      <img class="runner" src="corredor.png" alt="Corredor">
-      <img class="hexagono" src="recurso_48.png" alt="Hexágono">
+    <div class="hero-cta">
+      <img src="inscribete.png" alt="Inscríbete">
     </div>
   </div>
 </section>
 
+<!-- ═══ ROW 1: DISTANCIAS · RUTA · CATEGORÍAS ═══ -->
 <div id="informacion" class="panels-row">
   <div class="panel-item"><img src="m1.png" alt="Distancias"></div>
   <div class="panel-item"><img src="m2.png" alt="Ruta"></div>
   <div class="panel-item"><img src="m3.png" alt="Categorías"></div>
 </div>
 
+<!-- ═══ ROW 2: HIDRATACIÓN · INFORMACIÓN · KIT ═══ -->
 <div class="panels-row-2">
   <div class="panel-item"><img src="m4.png" alt="Puntos de Hidratacion"></div>
   <div class="panel-item"><img src="m5.png" alt="Informacion"></div>
   <div class="panel-item"><img src="m6.png" alt="Kit corredor"></div>
 </div>
 
+<!-- ═══ ORGANIZADORES ═══ -->
 <section id="organizadores" class="org-section">
   <img class="org-watermark" src="logo_transparente.png" alt="">
 
@@ -494,6 +473,7 @@ body {
   </div>
 </section>
 
+<!-- ═══ PATROCINADORES ═══ -->
 <section id="patrocinadores" class="patro-section">
   <img class="org-watermark" src="logo_transparente.png" alt="">
   
@@ -510,6 +490,7 @@ body {
   </div>
 </section>
 
+<!-- ═══ CONTACTO ═══ -->
 <section id="contacto" class="contacto-section">
   
   <div class="contacto-title-container">
@@ -545,6 +526,7 @@ body {
   </div>
 </section>
 
+<!-- ═══ SCRIPT PARA MENÚ HAMBURGUESA ═══ -->
 <script>
   const mobileBtn = document.getElementById('mobile-menu-btn');
   const navLinks = document.getElementById('nav-links');
