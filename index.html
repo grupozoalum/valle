@@ -334,24 +334,9 @@ body {
    MEDIA QUERIES (PÁGINA RESPONSIVA)
    ======================================================== */
 
-/* Adaptación para Tablets (Max 992px) */
-@media (max-width: 992px) {
-  .hero-content { width: 100%; z-index: 5; text-align: center; align-items: center; }
-  .hero-cta { padding-left: 0; }
-  .hero-visuals { opacity: 0.6; }
-  .hexagono { left: 10%; bottom: 5%; }
-  
-  .panels-row, .panels-row-2 { flex-wrap: wrap; }
-  .panel-item { max-width: 48%; margin-bottom: 15px; }
-  .patro-grid { grid-template-columns: repeat(2, 1fr); }
-  .contacto-grid { flex-direction: column; align-items: center; gap: 30px; }
-  .contacto-izq, .contacto-der { padding: 0; align-items: center; }
-  .contacto-izq .redes, .contacto-der .redes { align-items: center; }
-  .contacto-divisor { width: 80%; height: 2px; }
-}
-
-/* Adaptación para Celulares (Max 768px) */
-@media (max-width: 768px) {
+/* 1. TABLETS Y CELULARES ACOSTADOS (Max 1050px) 
+   ¡Esta es la corrección! El menú baguette se activa antes para evitar desbordes */
+@media (max-width: 1050px) {
   .navbar { padding: 10px 20px; }
   .menu-toggle { display: block; }
   
@@ -372,6 +357,22 @@ body {
   .nav-links.active { display: flex; }
   .nav-donar { display: none; } 
 
+  .hero-content { width: 100%; z-index: 5; text-align: center; align-items: center; }
+  .hero-cta { padding-left: 0; }
+  .hero-visuals { opacity: 0.6; }
+  .hexagono { left: 10%; bottom: 5%; }
+  
+  .panels-row, .panels-row-2 { flex-wrap: wrap; }
+  .panel-item { max-width: 48%; margin-bottom: 15px; }
+  .patro-grid { grid-template-columns: repeat(2, 1fr); }
+  .contacto-grid { flex-direction: column; align-items: center; gap: 30px; }
+  .contacto-izq, .contacto-der { padding: 0; align-items: center; }
+  .contacto-izq .redes, .contacto-der .redes { align-items: center; }
+  .contacto-divisor { width: 80%; height: 2px; }
+}
+
+/* 2. CELULARES EN VERTICAL (Max 768px) */
+@media (max-width: 768px) {
   .hero {
     min-height: auto;
   }
