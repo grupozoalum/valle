@@ -70,25 +70,12 @@ body {
    se monta ni cambia de orden.
    Los % de abajo están calibrados sobre la proporción del
    mockup de referencia (~1136 x 517, ratio ≈ 2.2 / 1).
-
-   NUEVO: el contenido real vive dentro de .hero-canvas, que
-   es el que conserva el aspect-ratio fijo. .hero (el <section>)
-   se vuelve, en móvil, un contenedor de 100dvh que CENTRA ese
-   canvas, logrando que el hero ocupe toda la pantalla sin
-   deformar ni reacomodar nada de su diseño interno.
    ══════════════════════════════════════════════════════════ */
 .hero {
   position: relative;
   width: 100%;
   aspect-ratio: 1136 / 517;
   overflow: hidden;
-}
-
-.hero-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
 }
 
 .hero-main-logo {
@@ -331,33 +318,6 @@ body {
 }
 .contacto-der .redes img { height: 30px; object-fit: contain; }
 
-/* ─── INDICADOR DE SCROLL (solo aparece en el hero móvil pantalla completa) ─── */
-.scroll-hint {
-  position: absolute;
-  left: 50%;
-  bottom: 4%;
-  transform: translateX(-50%);
-  z-index: 7;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  color: #ffffff;
-  font-family: Arial, sans-serif;
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  opacity: 0.85;
-  animation: scrollBounce 1.6s infinite;
-  pointer-events: none;
-}
-.scroll-hint svg { width: 20px; height: 20px; }
-
-@keyframes scrollBounce {
-  0%, 100% { transform: translate(-50%, 0); }
-  50% { transform: translate(-50%, 8px); }
-}
-
 
 /* ========================================================
    MEDIA QUERIES (PÁGINA RESPONSIVA)
@@ -400,33 +360,6 @@ body {
   .nav-links.active { display: flex; }
   .nav-donar { display: none; } 
 
-  /* ── HERO A PANTALLA COMPLETA EN MÓVIL ──
-     El <section> ya no usa aspect-ratio: ahora mide el alto
-     completo de la pantalla (100dvh, que no salta al aparecer
-     o esconderse la barra de direcciones del navegador).
-     Dentro, .hero-canvas SIGUE con el aspect-ratio original,
-     así que todo tu diseño (logo, botón, corredor, hexágono)
-     se mantiene intacto — solo queda centrado dentro de esa
-     pantalla completa, con el fondo morado rellenando el resto. */
-  .hero {
-    aspect-ratio: unset;
-    height: 100vh;
-    height: 100dvh;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .hero-canvas {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    aspect-ratio: 1136 / 517;
-  }
-
-  .scroll-hint { display: flex; }
-
   .panels-row, .panels-row-2 { 
     flex-direction: column; 
     align-items: center; 
@@ -464,27 +397,16 @@ body {
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
-  <div class="hero-canvas">
-    <div class="hero-visuals">
-      <img class="runner" src="corredor.png" alt="Corredor">
-      <img class="hexagono" src="recurso_48.png" alt="Hexágono">
+  <div class="hero-visuals">
+    <img class="runner" src="corredor.png" alt="Corredor">
+    <img class="hexagono" src="recurso_48.png" alt="Hexágono">
+  </div>
+  <div class="hero-content">
+   <div class="hero-main-logo"> 
+      <img src="logo_1.png" alt="Logo Hero">
     </div>
-    <div class="hero-content">
-     <div class="hero-main-logo"> 
-        <img src="logo_1.png" alt="Logo Hero">
-      </div>
-      <div class="hero-cta">
-        <img src="inscribete.png" alt="Inscríbete">
-      </div>
-    </div>
-
-    <!-- Indicador de scroll, solo visible en móvil (pantalla completa) -->
-    <div class="scroll-hint">
-      <span>Desliza</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 5v14"/>
-        <path d="M19 12l-7 7-7-7"/>
-      </svg>
+    <div class="hero-cta">
+      <img src="inscribete.png" alt="Inscríbete">
     </div>
   </div>
 </section>
